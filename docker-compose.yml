@@ -1,0 +1,21 @@
+version: '3.7'
+
+services:
+  app:
+    build: ./app
+    depends_on:
+      - mongo
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/mydatabase
+    stdin_open: true
+    tty: true
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:
